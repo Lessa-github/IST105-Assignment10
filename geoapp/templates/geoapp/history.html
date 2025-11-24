@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search History</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 30px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .json-data {
+            background-color: #2d2d2d;
+            color: #83c37d;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: auto;
+            font-size: 0.85em;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>📜 Search History (MongoDB)</h1>
+
+    {% if history %}
+    {% for entry in history %}
+    <div class="card">
+        <div class="meta">
+            <strong>Continent:</strong> {{ entry.continent }} |
+            <strong>Time:</strong> {{ entry.timestamp|date:"Y-m-d H:i:s" }}
+        </div>
+        <div class="json-data">
+            {{ entry.results_json }}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p style="text-align: center;">No history found in database.</p>
+    {% endif %}
+
+    <a href="{% url 'continent_search' %}" class="back-link">⬅ Back to Search</a>
+</body>
+
+</html>

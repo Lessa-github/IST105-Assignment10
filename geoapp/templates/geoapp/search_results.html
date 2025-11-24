@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Results</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 30px;
+            background-color: #f4f4f9;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .status {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .nav-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Weather Results</h1>
+
+    <div class="status">
+        MongoDB Status: <span style="color: {% if 'Error' in save_status %}red{% else %}green{% endif %};">{{
+            save_status }}</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Capital</th>
+                <th>Population</th>
+                <th>Temp (°C)</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in results %}
+            <tr>
+                <td>{{ item.country }}</td>
+                <td>{{ item.capital }}</td>
+                <td>{{ item.population }}</td>
+                <td>
+                    {% if item.temp is not None %}
+                    {{ item.temp }}°C
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+                <td>{{ item.description|title }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="nav-links">
+        <a href="{% url 'continent_search' %}">⬅ Search Again</a>
+        <a href="{% url 'search_history' %}">📜 View History</a>
+    </div>
+</body>
+
+</html>
