@@ -78,6 +78,7 @@
                 <th>Country</th>
                 <th>Capital</th>
                 <th>Population</th>
+                <th>Coordinates</th>
                 <th>Temp (°C)</th>
                 <th>Description</th>
             </tr>
@@ -88,6 +89,7 @@
                 <td>{{ item.country }}</td>
                 <td>{{ item.capital }}</td>
                 <td>{{ item.population }}</td>
+                <td>{{ item.coords }}</td>
                 <td>
                     {% if item.temp is not None %}
                     {{ item.temp }}°C
